@@ -5,88 +5,46 @@ const http = require('http');
 const URL = require('url').URL;
 const fetch = require("node-fetch");
 
-let links = [{
-  id: 'link-0',
-  url: 'www.howtographql.com',
-  description: 'Fullstack tutorial for GraphQL'
-}]
-
-// 1
-let idCount = links.length
 const resolvers = {
   Query: {
-    info: () => `This is the API of a Hackernews Clone`,
-    feed: () => links,
     
     getStudent: () => fetch(`http://localhost:8080/student`).then(res => res.json()),
-    
 
     getClassroom: () => fetch(`http://localhost:8081/classroom`).then(res => res.json()),
 
-
-
-
-
-
-
-    // getStudentById: (parent, args) => {
-    //   const { id } = args
-    //   console.log(id);
-    //   return fetch(`http://localhost:8080/student/${id}`).then(res => res.json()).then(function(data){
-    //     let classroom = fetch(`http://localhost:8081/classroom/${data.classroomId}`)
-
-    //     console.log(classroom)
-
-    //     let student = {
-    //     id: data.id,
-    //     name: data.name,
-    //     age: data.age,
-    //     email: data.email,
-    //     classroom: classroom
-    //     }
-
-    //     console.log(student)
-    //     return student
-    //   })
-
-      
-
-    // },
-
     getStudentById: (parent, args) => {
       const { id } = args
-      console.log(id);
-      let responseStudent = fetch(`http://localhost:8080/student/${id}`).then(res => res.json()).then(function(data){
-        return data;
-      })
+      let post;
 
-      console.log(responseStudent)
-      // let classroom = fetch(`http://localhost:8081/classroom/${responseStudent.classroomId}`).then(res => res.json())
+      // Call the API
+      return fetch(`http://localhost:8080/student/${id}`).then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject(response);
+        }
+        }).then(function (data) {
 
-      // console.log(classroom)
+        // Store the post data to a variable
+        post = data;
 
-      //   let student = {
-      //   id: responseStudent.id,
-      //   name: responseStudent.name,
-      //   age: responseStudent.age,
-      //   email: responseStudent.email,
-      //   classroom: classroom
-      //   }
+        // Fetch another API
+        return fetch(`http://localhost:8081/classroom/${data.classroomId}`);
 
-      //   console.log(student)
-      //   return student
-      
-
-      
+        }).then(function (response) {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject(response);
+        }
+      }).then(function (userData) {
+         post.classroom = userData;
+         return post;
+      }).catch(function (error) {
+        console.warn(error);
+      });
 
     },
-
-
-
-
-
-
-
 
 
     getClassroomById: (parent, args) => {
@@ -97,16 +55,6 @@ const resolvers = {
     
   },
   Mutation: {
-    // 2
-    // post: (parent, args) => {
-    //    const link = {
-    //     id: `link-${idCount++}`,
-    //     description: args.description,
-    //     url: args.url,
-    //   }
-    //   links.push(link)
-    //   return link
-    // },
 
   createStudent: (parent, args) => {
       const student = {
@@ -129,7 +77,6 @@ const resolvers = {
         code: args.code
       }
 
-      console.log(student);
       return fetch('http://localhost:8081/classroom', {method: 'POST',body: JSON.stringify(classroom), headers: { 'Content-Type': 'application/json' }
              }).then(res => res.json())
   },
@@ -147,30 +94,6 @@ const resolvers = {
     },
   },
 }
-
-// function sendRequestToStudentService() {
-//   let options = new URL("http://localhost:8080/student")
-
-//  http.get(options, (resp) => {
-//   let data = '';
-
-//   // A chunk of data has been recieved.
-//   resp.on('data', (chunk) => {
-//     data += chunk;
-//   });
-
-//   // The whole response has been received. Print out the result.
-//   resp.on('end', () => {
-//     console.log(data);
-//     return JSON.parse(data);
-
-//   });
-
-// }).on("error", (err) => {
-//   console.log("Error: " + err.message);
-// });
-// }
-
 
 const server = new ApolloServer({
   typeDefs: fs.readFileSync(
