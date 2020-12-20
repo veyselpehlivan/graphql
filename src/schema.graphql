@@ -1,0 +1,36 @@
+type Query {
+  info: String!
+  feed: [Link!]!
+  getStudent: [Student!]!
+  getStudentById(id: Int!): Student!
+  getClassroom: [Classroom!]!
+  getClassroomById(id: Int!): Classroom!
+}
+
+type Mutation {
+  post(url: String!, description: String!): Link!
+  createStudent(id: Int!, name: String!, age: Int!, email: String!, classroomId: Int!): Student!
+  deleteStudent(id: Int!): Int
+  deleteClassroom(id: Int!): Int
+  createClassroom(id: Int!, name: String!, code: String!): Classroom!
+}
+
+type Link {
+  id: ID!
+  description: String!
+  url: String!
+}
+
+type Student {
+  id: ID!
+  name: String!
+  age: Int!	
+  email: String!
+  classroom: Classroom!
+}
+
+type Classroom {
+  id: ID!
+  name: String!
+  code: String!
+}
