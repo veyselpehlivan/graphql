@@ -1,6 +1,7 @@
 package com.kloia.classroom.service;
 
 import com.kloia.classroom.model.Classroom;
+import com.kloia.classroom.model.ClassroomFindByIdsRequestDto;
 import com.kloia.classroom.repository.ClassroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class ClassroomService {
         return (List<Classroom>) classroomRepository.findAll();
     }
 
+    public List<Classroom> getClassroomByIds( ClassroomFindByIdsRequestDto requestDto) {
+        return (List<Classroom>) classroomRepository.findAllById(requestDto.getIds());
+    }
 
     public Classroom getClassroomById(int id) {
 

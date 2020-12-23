@@ -8,16 +8,61 @@ const fetch = require("node-fetch");
 const resolvers = {
   Query: {
     
-    getStudent: () => fetch(`http://localhost:8080/student`).then(res => res.json()),
+    getStudent: () => {
+    let classroomIds = [];
+    return fetch('http://localhost:8080/student').then(function(response){
+        if (response.ok) {
+          return response.json()
+        } else {
+          return Promise.reject(response)
+        }
+    }).then(function(student) {
+      classroomIds.push(student.classroomId);
+      return fetch('http://localhost:8081/classroom/find-by-ids', {method: 'POST',body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' }});
+    })
+//    .then(function(response) {
+//        if (response.ok) {
+//          return response.json();
+//        } else {
+//          return Promise.reject(response);
+//        }
+//    }).then(function(classroom){
+//
+//    })
+
+
+
+
+
+
+
+
+
+    },
+
+
+    getClassroomByIds: (parent, args) => {
+              const dto = {
+                      ids: args.ids
+                    }
+                return fetch(`http://localhost:8081/classroom/find-by-ids`,
+                    {method: 'POST',body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' }}
+                ).then(res => res.json())
+          },
+
+
+
 
     getClassroom: () => fetch(`http://localhost:8081/classroom`).then(res => res.json()),
+
+
 
     getStudentById: (parent, args) => {
       const { id } = args
       let post;
 
       // Call the API
-      return fetch(`http://localhost:8080/student/${id}`).then(function (response) {
+      return fetch('http://localhost:8080/student/${id}').then(function (response) {
         if (response.ok) {
           return response.json();
         } else {

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="52de1772-8b76-4f51-9fa5-4b5d7509451d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/java/classroom/src/main/java/com/kloia/classroom/model/ClassroomFindByIdsRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/classroom/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java/classroom/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/classroom/src/main/java/com/kloia/classroom/controller/ClassroomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/classroom/src/main/java/com/kloia/classroom/controller/ClassroomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/classroom/src/main/java/com/kloia/classroom/service/ClassroomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/classroom/src/main/java/com/kloia/classroom/service/ClassroomService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/dist/exports.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/dist/exports.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/dist/exports.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/dist/exports.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/dist/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/dist/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/dist/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/src/__tests__/index.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/src/__tests__/index.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/src/__tests__/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/src/__tests__/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/src/exports.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/src/exports.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/apollo-server/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/apollo-server/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.graphql" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.3\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1m46iuGeT3Mgq4q0RlzOBn8k2eh" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="52de1772-8b76-4f51-9fa5-4b5d7509451d" name="Default Changelist" comment="" />
+      <created>1608740647205</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608740647205</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="666" y="119" width="587" height="801" key="find.popup" timestamp="1608741483543">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="666" y="119" width="587" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1608741483543" />
+  </component>
+</project>
