@@ -1,13 +1,13 @@
-package com.kloia.h2example;
+package com.kloia.student;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class H2ExampleApplication {
+public class StudentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(H2ExampleApplication.class, args);
+		SpringApplication.run(StudentApplication.class, args);
 	}
 
 }

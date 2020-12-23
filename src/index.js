@@ -17,6 +17,7 @@ const resolvers = {
           return Promise.reject(response)
         }
     }).then(function(students) {
+
       for (student of students) {
         classroomIds.push(student.classroomId);
       }
@@ -35,35 +36,32 @@ const resolvers = {
         }
     }).then(function(classroomList) {
 
-      console.log(classroomList);
+        console.log(classroomList);
 
-      for (student of students) {
-        for (classroom of classroomList){
-          if(student.classroomId == classroom.id){
-              student.classroom = classroom;
-          }
-        }
-    }
+          for (student of students) {
+            for (classroom of classroomList){
+              if(student.classroomId == classroom.id){
+                  student.classroom = classroom;
+              }
+            }
+           }
 
-    return students;
-    });
+           return students;
+        });
 
-    })
+      })
 
     },
 
 
     getClassroomByIds: (parent, args) => {
-              const dto = {
-                      ids: args.ids
-                    }
-                return fetch(`http://localhost:8081/classroom/find-by-ids`,
-                    {method: 'POST',body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' }}
-                ).then(res => res.json())
-          },
-
-
-
+      const dto = {
+              ids: args.ids
+            }
+        return fetch(`http://localhost:8081/classroom/find-by-ids`,
+            {method: 'POST',body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' }}
+        ).then(res => res.json())
+    },
 
     getClassroom: () => fetch(`http://localhost:8081/classroom`).then(res => res.json()),
 
