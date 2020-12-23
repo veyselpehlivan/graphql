@@ -16,27 +16,39 @@ const resolvers = {
         } else {
           return Promise.reject(response)
         }
-    }).then(function(student) {
-      classroomIds.push(student.classroomId);
-      return fetch('http://localhost:8081/classroom/find-by-ids', {method: 'POST',body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' }});
+    }).then(function(students) {
+      for (student of students) {
+        classroomIds.push(student.classroomId);
+      }
+      
+      const dto = {
+          ids: classroomIds
+      }
+      
+    return fetch('http://localhost:8081/classroom/find-by-ids', 
+        {method: 'POST',body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' }}).then(function(classrooms){
+
+        if (classrooms.ok) {
+          return classrooms.json()
+        } else {
+          return Promise.reject(classrooms)
+        }
+    }).then(function(classroomList) {
+
+      console.log(classroomList);
+
+      for (student of students) {
+        for (classroom of classroomList){
+          if(student.classroomId == classroom.id){
+              student.classroom = classroom;
+          }
+        }
+    }
+
+    return students;
+    });
+
     })
-//    .then(function(response) {
-//        if (response.ok) {
-//          return response.json();
-//        } else {
-//          return Promise.reject(response);
-//        }
-//    }).then(function(classroom){
-//
-//    })
-
-
-
-
-
-
-
-
 
     },
 
@@ -62,7 +74,7 @@ const resolvers = {
       let post;
 
       // Call the API
-      return fetch('http://localhost:8080/student/${id}').then(function (response) {
+      return fetch(`http://localhost:8080/student/${id}`).then(function (response) {
         if (response.ok) {
           return response.json();
         } else {
