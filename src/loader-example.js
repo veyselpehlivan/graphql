@@ -1,58 +1,32 @@
 const { ApolloServer } = require('apollo-server');
 const fs = require('fs');
 const path = require('path');
-const http = require('http');
-const URL = require('url').URL;
 const fetch = require("node-fetch");
+const DataLoader = require("dataloader");
 
 const resolvers = {
     Query: {
-
         getStudent: () => {
-            let classroomIds = [];
             return fetch('http://localhost:8080/student').then(function (response) {
                 if (response.ok) {
                     return response.json()
                 } else {
                     return Promise.reject(response)
                 }
-            }).then(function (students) {
-
-                for (student of students) {
-                    classroomIds.push(student.classroomId);
-                }
-
-                const dto = {
-                    ids: classroomIds
-                }
-
-                return fetch('http://localhost:8081/classroom/find-by-ids',
-                    { method: 'POST', body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' } }).then(function (classrooms) {
-
-                        if (classrooms.ok) {
-                            return classrooms.json()
-                        } else {
-                            return Promise.reject(classrooms)
-                        }
-                    }).then(function (classroomList) {
-
-                        console.log(classroomList);
-
-                        for (student of students) {
-                            for (classroom of classroomList) {
-                                if (student.classroomId == classroom.id) {
-                                    student.classroom = classroom;
-                                }
-                            }
-                        }
-
-                        return students;
-                    });
-
             })
-
         },
 
+        getStudentById: (parent, args) => {
+            const { id } = args
+
+            return fetch(`http://localhost:8080/student/${id}`).then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return Promise.reject(response);
+                }
+            })
+        },
 
         getClassroomByIds: (parent, args) => {
             const dto = {
@@ -64,53 +38,18 @@ const resolvers = {
         },
 
         getClassroom: () => fetch(`http://localhost:8081/classroom`).then(res => res.json()),
-
-
-
-        getStudentById: (parent, args) => {
-            const { id } = args
-            let post;
-
-            // Call the API
-            return fetch(`http://localhost:8080/student/${id}`).then(function (response) {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return Promise.reject(response);
-                }
-            }).then(function (data) {
-
-                // Store the post data to a variable
-                post = data;
-
-                // Fetch another API
-                return fetch(`http://localhost:8081/classroom/${data.classroomId}`);
-
-            }).then(function (response) {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return Promise.reject(response);
-                }
-            }).then(function (userData) {
-                post.classroom = userData;
-                return post;
-            }).catch(function (error) {
-                console.warn(error);
-            });
-
-        },
-
-
-        getClassroomById: (parent, args) => {
-            const { id } = args
-            console.log(id);
-            return fetch(`http://localhost:8081/classroom/${id}`).then(res => res.json())
-        },
-
     },
-    Mutation: {
 
+    Student: {
+        id: (student, _args) => student.id,
+        classroom: (student, _args, { loader }) => {
+            console.log(student.classroomId);
+            //return fetch(`http://localhost:8081/classroom/${student.classroomId}`).then(res => res.json())
+            return loader.classrooms.load(student.classroomId);
+        }
+    },
+
+    Mutation: {
         createStudent: (parent, args) => {
             const student = {
                 id: args.id,
@@ -150,6 +89,26 @@ const resolvers = {
             return fetch(`http://localhost:8081/classroom/${id}`, { method: 'DELETE' }).then(res => res.json())
         },
     },
+};
+
+const loader = {
+    classrooms: new DataLoader(async ids => {
+        const dto = {
+            ids: ids
+        }
+        const rows = await fetch(`http://localhost:8081/classroom/find-by-ids`,
+            { method: 'POST', body: JSON.stringify(dto), headers: { 'Content-Type': 'application/json' } }
+        ).then(res => res.json())
+
+        const lookup = rows.reduce((acc, row) => {
+            acc[row.id] = row;
+            return acc;
+        }, {});
+
+        console.log(lookup);
+
+        return ids.map(id => lookup[id] || null);
+    })
 }
 
 const server = new ApolloServer({
@@ -158,6 +117,9 @@ const server = new ApolloServer({
         'utf8'
     ),
     resolvers,
+    context: () => {
+        return { loader };
+    }
 })
 
 server

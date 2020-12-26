@@ -18,6 +18,7 @@ type Student {
   name: String!
   age: Int!	
   email: String!
+  classroomId: Int!
   classroom: Classroom!
 }
 
