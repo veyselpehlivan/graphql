@@ -2,45 +2,48 @@ package com.kloia.student.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import com.kloia.student.converter.StudentConverter;
 import com.kloia.student.dto.StudentFindByClassroomIdDto;
+import com.kloia.student.exception.StudentNotFoundException;
 import com.kloia.student.model.Student;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kloia.student.repository.StudentRepository;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
+    private final StudentConverter studentConverter;
 
-    public List<Student> getAllStudent()
-    {
-        List<Student> students = new ArrayList<>();
-        studentRepository.findAll().forEach(student -> students.add(student));
-        return students;
+    public List<Student> getAllStudent() {
+        return studentRepository.findAll();
     }
 
-    public Student getStudentById(int id)
-    {
-        return studentRepository.findById(id).get();
+    public Student getStudentById(int id) throws StudentNotFoundException {
+        return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException("Student not found"));
     }
 
-    public List<Student> getStudentByClassroomIds(StudentFindByClassroomIdDto dto)
-    {
+    public List<Student> getStudentByClassroomIds(StudentFindByClassroomIdDto dto) {
         return studentRepository.findStudentsByClassroomIds(dto.getClassroomIds());
     }
 
-
-    public void saveOrUpdate(Student student)
-    {
-        studentRepository.save(student);
+    public Student save(Student student) {
+        return studentRepository.save(student);
     }
 
-    public int delete(int id)
-    {
+    public int delete(int id) {
         studentRepository.deleteById(id);
         return id;
+    }
+
+    public Student update(Student newStudent, Integer id) throws StudentNotFoundException {
+        Optional<Student> opt = studentRepository.findById(id);
+        Student student = studentConverter.convert(newStudent, opt.orElseThrow(() -> new StudentNotFoundException("Stundet not found")));
+        return studentRepository.save(student);
     }
 }

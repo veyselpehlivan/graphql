@@ -1,4 +1,4 @@
-package com.kloia.classroom.model;
+package com.kloia.classroom.dto;
 
 
 import lombok.Data;

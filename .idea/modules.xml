@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/java/classroom/classroom.iml" filepath="$PROJECT_DIR$/java/classroom/classroom.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/graphql.iml" filepath="$PROJECT_DIR$/.idea/graphql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/student/student.iml" filepath="$PROJECT_DIR$/java/student/student.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java/teacher/teacher.iml" filepath="$PROJECT_DIR$/java/teacher/teacher.iml" />
     </modules>
   </component>
 </project>

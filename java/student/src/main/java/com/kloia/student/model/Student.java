@@ -2,10 +2,7 @@ package com.kloia.student.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -20,11 +17,11 @@ public class Student {
     private String name;
 
     @Column
-    private int age;
+    private Integer age;
 
     @Column
     private String email;
 
     @Column
-    private int classroomId;
+    private Integer classroomId;
 }
