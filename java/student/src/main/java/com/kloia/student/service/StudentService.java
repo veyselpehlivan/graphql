@@ -1,6 +1,5 @@
 package com.kloia.student.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +8,6 @@ import com.kloia.student.dto.StudentFindByClassroomIdDto;
 import com.kloia.student.exception.StudentNotFoundException;
 import com.kloia.student.model.Student;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kloia.student.repository.StudentRepository;
 
@@ -43,7 +41,8 @@ public class StudentService {
 
     public Student update(Student newStudent, Integer id) throws StudentNotFoundException {
         Optional<Student> opt = studentRepository.findById(id);
-        Student student = studentConverter.convert(newStudent, opt.orElseThrow(() -> new StudentNotFoundException("Stundet not found")));
+        Student student = studentConverter.convert(newStudent,
+                opt.orElseThrow(() -> new StudentNotFoundException("Stundet not found")));
         return studentRepository.save(student);
     }
 }

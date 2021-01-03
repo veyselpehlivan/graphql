@@ -7,7 +7,6 @@ import com.kloia.student.exception.StudentNotFoundException;
 import com.kloia.student.model.Student;
 import com.kloia.student.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -103,7 +103,7 @@ const resolvers = {
     Classroom: {
         id: (classroom, _args) => classroom.id,
         teacher: (classroom, _args, { loaderClassroom }) => {
-            console.log(classroom.teacherId);
+            console.log("deneme" + classroom.teacherId);
             return loaderClassroom.teachers.load(classroom.teacherId);
         }
     },

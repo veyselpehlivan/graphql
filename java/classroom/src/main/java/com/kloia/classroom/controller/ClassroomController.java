@@ -5,7 +5,6 @@ import com.kloia.classroom.model.Classroom;
 import com.kloia.classroom.dto.ClassroomFindByIdsRequestDto;
 import com.kloia.classroom.service.ClassroomService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
