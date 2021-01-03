@@ -212,7 +212,7 @@ const loaderStudent = {
         console.log(lookup);
 
         return ids.map(id => lookup[id] || null);
-    })
+    }, { cache: true })
 }
 
 const loaderClassroom = {
@@ -232,7 +232,7 @@ const loaderClassroom = {
         console.log(lookup);
 
         return ids.map(id => lookup[id] || null);
-    })
+    }, { cache: false })
 }
 
 const loaderTeacher = {
@@ -252,7 +252,7 @@ const loaderTeacher = {
         console.log(lookup);
 
         return ids.map(id => lookup[id] || null);
-    })
+    } , { cache: false })
 }
 
 const server = new ApolloServer({
